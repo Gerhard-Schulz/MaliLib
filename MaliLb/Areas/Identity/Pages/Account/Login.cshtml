@@ -1,0 +1,41 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Вход в систему MaliLib";
+}
+
+<div class="row mt-5 justify-content-center">
+    <div class="col-md-4">
+        <h1 class="text-center noselect">@ViewData["Title"]</h1>
+        <section>
+            <h5 class="text-center text-secondary mt-3 pb-3">Чтобы продолжить работу на сайте библиотеки, вам нужно войти в систему под аккаунтом администратора!</h5>
+            <form id="account" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Input.Email" class="form-label noselect">Эл.почта</label>
+                    <span asp-validation-for="Input.Email" class="text-danger noselect"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.Password" class="form-label noselect">Пароль</label>
+                    <span asp-validation-for="Input.Password" class="text-danger noselect"></span>
+                </div>
+                <div class="checkbox mb-3">
+                    <label asp-for="Input.RememberMe" class="form-label noselect">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+                <div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-primary noselect">Войти</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

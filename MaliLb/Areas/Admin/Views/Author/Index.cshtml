@@ -1,0 +1,32 @@
+﻿@using MaliLb.Models;
+@model IEnumerable<Author>
+
+@{
+    ViewData["Title"] = "Авторы";
+}
+
+<h2 class="text-center text-primary mt-4">Авторы</h2>
+<table class="table table-hover w-100 mt-3 pb-2 cell-centered">
+    <thead>
+        <tr class="table-primary text-light">
+            <th>ID</th>
+            <th>ФИО</th>
+            <th><a asp-controller="Author" asp-action="Add" class="btn btn-success w-100 h-75">Добавить</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var author in Model)
+        {
+            <tr>
+                <td class="text-primary">@author.ID</td>
+                <td>@author.Name</td>
+                <td>
+                    <div class="w-100 btn-group" role="group">
+                        <a asp-controller="Author" asp-action="Edit" asp-route-id="@author.ID" class="btn btn-outline-warning mx-2">Изменить</a>
+                        <a asp-controller="Author" asp-action="Delete" asp-route-id="@author.ID" class="btn btn-outline-danger mx-2">Удалить</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,38 @@
+﻿@using MaliLb.Models;
+@model Edition
+
+@{
+    ViewData["Title"] = "Изменение";
+}
+
+<div class="row justify-content-center">
+    <div class="col-7">
+        <form method="post">
+            <div class="border p-3 mt-4">
+                <div class="pb-2">
+                    <h2 class="text-primary">Изменить информацию об издателе</h2>
+                    <hr />
+                </div>
+                <div class="mb-3">
+                    <label class ="p-1" asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <a asp-controller="Edition" asp-action="Index" class="btn btn-dark w-100">Вернуться к списку</a>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-warning w-100">Принять изменения</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"></partial>
+    }
+}

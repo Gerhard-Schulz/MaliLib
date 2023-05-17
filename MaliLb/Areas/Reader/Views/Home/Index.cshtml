@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Домашняя";
+}
+@if (SignInManager.IsSignedIn(User) && User.IsInRole(Roles.Admin))
+{
+    <div class="text-center mt-5">
+        <h1 class="display-3">Вы вошли в систему под аккаунтом <span class="text-primary">@UserManager.GetUserName(User)</span>!</h1>
+        <h1 class="display-6 mt-5 pt-5">Удачной работы и ответственных читателей!</h1>
+    </div>
+}
