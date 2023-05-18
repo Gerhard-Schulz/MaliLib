@@ -18,7 +18,7 @@ namespace MaliLb.Models
 
         public override string ToString()
         {
-            return $"{СardNumber} - {Name}";
+            return $"[{СardNumber}] - {Name}";
         }
     }
 }

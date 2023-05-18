@@ -57,6 +57,6 @@ body {
     vertical-align: middle;
 }
 
-a, p, td {
+a, p, td, div    {
     font-size: 1.2rem;
 }

@@ -1,0 +1,62 @@
+﻿@using MaliLb.Models;
+@model Book
+
+@{
+    ViewData["Title"] = "Добавление";
+}
+
+<div class="row justify-content-center">
+    <div class="col-7">
+        <form method="post">
+            <div class="border p-3 mt-4">
+                <div class="pb-2">
+                    <h2 class="text-primary">Новая книга</h2>
+                    <hr />
+                </div>
+                <div class="mb-3">
+                    <label class="p-1" asp-for="WorkID"></label>
+                    <select asp-for="WorkID" asp-items="ViewBag.WorkList" class="form-select">
+                        <option selected disabled></option>
+                    </select>
+                    <span asp-validation-for="WorkID" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="p-1" asp-for="EditionID"></label>
+                    <select asp-for="EditionID" asp-items="ViewBag.EditionList" class="form-select">
+                        <option selected disabled></option>
+                    </select>
+                    <span asp-validation-for="EditionID" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="p-1" for="floatingInput" asp-for="YearOfPublishing"></label>
+                    <input type="date" asp-for="YearOfPublishing" class="form-control" />
+                    <span asp-validation-for="YearOfPublishing" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="p-1" for="floatingInput" asp-for="Description">Описание <span class="text-secondary">(не обязательно)</span></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="p-1" for="floatingInput" asp-for="Img"></label>
+                    <input asp-for="Img" class="form-control" />
+                    <span asp-validation-for="Img" class="text-danger"></span>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <a asp-controller="Book" asp-action="Index" class="btn btn-dark w-100">Вернуться к списку</a>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-success w-100">Создать</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"></partial>
+    }
+}

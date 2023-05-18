@@ -1,0 +1,40 @@
+﻿@using MaliLb.Models;
+@model IEnumerable<Book>
+
+@{
+    ViewData["Title"] = "Книги";
+}
+
+<h1 class="text-primary text-center">Книги <a asp-controller="Book" asp-action="Add" class="btn btn-outline-success"><i class="bi bi-plus-lg"></i></a></h1>
+<div class="row pb-3">
+    @foreach (var book in Model)
+    {
+        <div class="col-3">
+            <div class="row p-2">
+                <div class="p-1 col-12">
+                    <div class="card border-0 p-3 shadow border-top border-5 rounded">
+                        @if (book.VisitorID != null)
+                        {
+                            <img src="@book.Img" class="cardcard-img-top rounded" style="filter:grayscale(); object-fit:cover;" />
+                        }
+                        else
+                        {
+                            <img src="@book.Img" class="cardcard-img-top rounded" />
+                        }
+                        <div class="card-body p-0">
+                            <div class="pl-1">
+                                <h3 class="text-center text-primary mt-2">@book.Work.Name</h3>
+                                <h5 class="text-center text-dark">Издание: @book.Edition</h5>
+                                @if (book.VisitorID != null)
+                                {
+                                    <div class="text-center text-dark">Держатель: @book.Visitor</div>
+                                }
+                                <a class="btn btn-primary w-100 mt-2" asp-area="Admin" asp-controller="Book" asp-action="Details" asp-route-id="@book.ID">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
