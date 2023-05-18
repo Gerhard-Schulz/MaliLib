@@ -2,28 +2,20 @@
 @model IEnumerable<Edition>
 
 @{
-    ViewData["Title"] = "Авторы";
+    ViewData["Title"] = "Издатели";
 }
 
-<h2 class="text-center text-primary mt-4">Издатели</h2>
+<h2 class="text-center text-primary mt-4">Издатели <a asp-controller="Edition" asp-action="Add" class="btn btn-outline-success"><i class="bi bi-plus-lg"></i></a></h2>
 <table class="table table-hover w-100 mt-3 pb-2 cell-centered">
-    <thead>
-        <tr class="table-primary text-light">
-            <th>ID</th>
-            <th>Название</th>
-            <th><a asp-controller="Edition" asp-action="Add" class="btn btn-success w-100 h-75">Добавить</a></th>
-        </tr>
-    </thead>
     <tbody>
         @foreach (var edition in Model)
         {
             <tr>
-                <td class="text-primary">@edition.ID</td>
-                <td>@edition.Name</td>
                 <td>
-                    <div class="w-100 btn-group" role="group">
-                        <a asp-controller="Edition" asp-action="Edit" asp-route-id="@edition.ID" class="btn btn-outline-warning mx-2">Изменить</a>
-                        <a asp-controller="Edition" asp-action="Delete" asp-route-id="@edition.ID" class="btn btn-outline-danger mx-2">Удалить</a>
+                    @edition.Name
+                    <div class="btn-group" role="group">
+                        <a asp-controller="Edition" asp-action="Edit" asp-route-id="@edition.ID" class="btn btn-outline-warning"><i class="bi bi-pen"></i></a>
+                        <a asp-controller="Edition" asp-action="Delete" asp-route-id="@edition.ID" class="btn btn-outline-danger"><i class="bi bi-trash3"></i></a>
                     </div>
                 </td>
             </tr>

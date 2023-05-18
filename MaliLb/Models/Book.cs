@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,25 +10,41 @@ namespace MaliLb.Models
         [Key]
         public int ID { get; set; }
 
+        [DisplayName("Описание")]
+        public string? Description { get; set; }
+
+
+        [DisplayName("Обложка")]
+        [Required(ErrorMessage = "Введите ссылку на фотографию")]
+        public string Img { get; set; }
+
         [DisplayName("Год издания")]
         [Required(ErrorMessage = "Введите год издания")]
         public DateTime YearOfPublishing { get; set; }
 
         [DisplayName("Произведение")]
         [Required(ErrorMessage = "Введите название произведения")]
+        [ForeignKey("Work")]
         public int WorkID { get; set; }
-        [ForeignKey("WorkID")]
+        [ValidateNever]
         public Work Work { get; set; }
 
         [DisplayName("Издание")]
         [Required(ErrorMessage = "Введите название издания")]
+        [ForeignKey("Edition")]
         public int EditionID { get; set; }
-        [ForeignKey("EditionID")]
+        [ValidateNever]
         public Edition Edition { get; set; }
 
         [DisplayName("Читатель, взявший книгу")]
+        [ForeignKey("Reader")]
         public int? ReaderID { get; set; }
-        [ForeignKey("ReaderID")]
+        [ValidateNever]
         public Reader Reader { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Work} [{Edition}]";
+        }
     }
 }

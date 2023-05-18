@@ -15,5 +15,10 @@ namespace MaliLb.Models
         [DisplayName("ФИО")]
         [Required(ErrorMessage = "Введите ФИО читателя")]
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return $"{СardNumber} - {Name}";
+        }
     }
 }

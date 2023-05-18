@@ -11,5 +11,10 @@ namespace MaliLb.Models
         [DisplayName("Название")]
         [Required(ErrorMessage = "Введите название жанра")]
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
     }
 }

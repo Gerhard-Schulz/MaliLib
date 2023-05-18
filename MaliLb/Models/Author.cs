@@ -11,5 +11,10 @@ namespace MaliLb.Models
         [DisplayName("ФИО")]
         [Required(ErrorMessage = "Введите ФИО автора")]
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
     }
 }
