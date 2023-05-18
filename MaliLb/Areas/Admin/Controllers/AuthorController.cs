@@ -1,7 +1,6 @@
 ﻿using MaliLb.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 namespace MaliLb.Areas.Admin.Controllers
 {
