@@ -14,7 +14,7 @@ namespace MaliLb
         public DbSet<Work> Work { get; set; }
         public DbSet<Edition> Edition { get; set; }
         public DbSet<Book> Book { get; set; }
-        public DbSet<Reader> Reader { get; set; }
+        public DbSet<Visitor> Visitor { get; set; }
 
         public ApplicationDbContext() => Database.EnsureCreated();
         protected override void OnModelCreating(ModelBuilder modelBuilder) => base.OnModelCreating(modelBuilder);

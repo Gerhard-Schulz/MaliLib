@@ -38,9 +38,9 @@ namespace MaliLb.Models
 
         [DisplayName("Читатель, взявший книгу")]
         [ForeignKey("Reader")]
-        public int? ReaderID { get; set; }
+        public int? VisitorID { get; set; }
         [ValidateNever]
-        public Reader Reader { get; set; }
+        public Visitor? Visitor { get; set; }
 
         public override string ToString()
         {

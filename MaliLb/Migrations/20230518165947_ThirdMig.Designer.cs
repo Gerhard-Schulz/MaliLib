@@ -4,6 +4,7 @@ using MaliLb;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MaliLb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230518165947_ThirdMig")]
+    partial class ThirdMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +39,7 @@ namespace MaliLb.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Author", (string)null);
+                    b.ToTable("Author");
                 });
 
             modelBuilder.Entity("MaliLb.Models.Book", b =>
@@ -74,7 +77,7 @@ namespace MaliLb.Migrations
 
                     b.HasIndex("WorkID");
 
-                    b.ToTable("Book", (string)null);
+                    b.ToTable("Book");
                 });
 
             modelBuilder.Entity("MaliLb.Models.Edition", b =>
@@ -91,7 +94,7 @@ namespace MaliLb.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Edition", (string)null);
+                    b.ToTable("Edition");
                 });
 
             modelBuilder.Entity("MaliLb.Models.Genre", b =>
@@ -108,7 +111,7 @@ namespace MaliLb.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Genre", (string)null);
+                    b.ToTable("Genre");
                 });
 
             modelBuilder.Entity("MaliLb.Models.Visitor", b =>
@@ -128,7 +131,7 @@ namespace MaliLb.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Visitor", (string)null);
+                    b.ToTable("Visitor");
                 });
 
             modelBuilder.Entity("MaliLb.Models.Work", b =>
@@ -161,7 +164,7 @@ namespace MaliLb.Migrations
 
                     b.HasIndex("GenreID");
 
-                    b.ToTable("Work", (string)null);
+                    b.ToTable("Work");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

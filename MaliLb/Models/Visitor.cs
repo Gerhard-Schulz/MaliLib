@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MaliLb.Models
 {
-    public class Reader
+    public class Visitor
     {
         [Key]
         public int ID { get; set; }

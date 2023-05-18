@@ -1,0 +1,33 @@
+﻿@using MaliLb.Models;
+@model IEnumerable<Visitor>
+
+@{
+    ViewData["Title"] = "Читатели";
+}
+
+<h2 class="text-center text-primary mt-4">Читатели <a asp-controller="Visitor" asp-action="Add" class="btn btn-outline-success"><i class="bi bi-plus-lg"></i></a></h2>
+<table class="table table-hover w-100 mt-3 pb-2 cell-centered">
+    <thead>
+        <tr class="table-light">
+            <th>Номер читательского билета</th>
+            <th>ФИО</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var visitor in Model)
+        {
+            <tr>
+                <td>
+                    @visitor.СardNumber
+                </td>
+                <td>
+                    @visitor.Name
+                    <div class="btn-group" role="group">
+                        <a asp-controller="Visitor" asp-action="Edit" asp-route-id="@visitor.ID" class="btn btn-outline-warning"><i class="bi bi-pen"></i></a>
+                        <a asp-controller="Visitor" asp-action="Delete" asp-route-id="@visitor.ID" class="btn btn-outline-danger"><i class="bi bi-trash3"></i></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

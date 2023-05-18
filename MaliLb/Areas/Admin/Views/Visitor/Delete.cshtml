@@ -1,5 +1,5 @@
 ﻿@using MaliLb.Models;
-@model Genre
+@model Visitor
 
 @{
     ViewData["Title"] = "Удаление";
@@ -10,11 +10,11 @@
         <form method="post">
             <div class="mt-5 pt-5">
                 <div class="pb-5 text-center">
-                    <h2 class="text-danger">Вы действительно хотите удалить жанр "@Model.Name"?</h2>
+                    <h2 class="text-danger">Вы действительно хотите удалить читателя @Model.Name (@Model.СardNumber)?</h2>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <a asp-controller="Genre" asp-action="Index" class="btn btn-dark w-100">Нет, вернуться к списку</a>
+                        <a asp-controller="Visitor" asp-action="Index" class="btn btn-dark w-100">Нет, вернуться к списку</a>
                     </div>
                     <div class="col">
                         <button type="submit" class="btn btn-danger w-100">Да, удалить</button>

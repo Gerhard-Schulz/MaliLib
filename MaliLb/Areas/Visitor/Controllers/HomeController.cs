@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace MaliLb.Areas.Reader.Controllers
 {
-    [Area("Reader")]
+    [Area("Visitor")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
