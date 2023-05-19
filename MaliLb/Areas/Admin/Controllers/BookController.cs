@@ -106,20 +106,9 @@ namespace MaliLb.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(Book book)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            Book? bookFromDb = _db.Book.Find(book.ID);
-            if (bookFromDb == null)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                _db.Book.Update(bookFromDb);
+                _db.Book.Update(book);
                 _db.SaveChanges();
                 return Redirect($"/Admin/Book/Details/{book.ID}");
             }
