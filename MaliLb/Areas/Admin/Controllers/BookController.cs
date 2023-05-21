@@ -27,7 +27,7 @@ namespace MaliLb.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            Book? bookFromDb = _db.Book.Include(u => u.Work).Include(u => u.Edition).Include(u => u.Visitor).FirstOrDefault(u => u.ID == id);
+            Book? bookFromDb = _db.Book.Include(u => u.Work).ThenInclude(u => u.Author).Include(u => u.Work).ThenInclude(u=>u.Genre).Include(u => u.Edition).Include(u => u.Visitor).FirstOrDefault(u => u.ID == id);
             if (bookFromDb == null)
             {
                 return NotFound();

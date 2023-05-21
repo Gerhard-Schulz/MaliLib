@@ -12,25 +12,28 @@
     </div>
     <div class="col-8">
         <div class="p-1">
-            <p>Издание: @Model.Edition</p>
-            <p>Год написания: @Model.Work.DateOfWriting.ToString("yyyyг.")</p>
-            <p>Год издания: @Model.YearOfPublishing.ToString("yyyyг.")</p>
+            <p><strong class="text-primary">Автор:</strong> @Model.Work.Author</p>
+            <p><strong class="text-primary">Жанр:</strong> @Model.Work.Genre</p>
+            <p><strong class="text-primary">Издание:</strong> @Model.Edition</p>
+            <p><strong class="text-primary">Год написания:</strong> @Model.Work.DateOfWriting.ToString("yyyyг.")</p>
+            <p><strong class="text-primary">Год издания:</strong> @Model.YearOfPublishing.ToString("yyyyг.")</p>
             <div class="row">
                 @if (Model.Work.Description != null)
                 {
-                    <div class="col-8">Описание произведения: @Model.Work.Description</div>
+                    <div class="col-8"><strong class="text-primary">Описание произведения:</strong> @Model.Work.Description</div>
                 }
                 @if (Model.Description != null)
                 {
-                    <div class="col-8">Описание книги: @Model.Description</div>
+                    <div class="col-8"><strong class="text-primary">Описание книги:</strong> @Model.Description</div>
                 }
             </div>
             @if (Model.VisitorID != null)
             {
-                <h4 class="text-info">На руках у @Model.Visitor</h4>
+                <h4 class="text-primary">На руках у @Model.Visitor</h4>
             }
         </div>
-        <div class="btn-group w-50 mt-4" role="group">
+        <div class="btn-group w-100 mt-4" role="group">
+            <a asp-controller="Book" asp-action="Index" asp-route-id="@Model.ID" class="btn btn-primary">Вернуться к списку</a>
             <a asp-controller="Book" asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning"><i class="bi bi-pen"></i></a>
             <a asp-controller="Book" asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-danger"><i class="bi bi-trash3"></i></a>
         </div>
