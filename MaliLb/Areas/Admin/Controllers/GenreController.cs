@@ -14,7 +14,7 @@ namespace MaliLb.Areas.Admin.Controllers
         public IActionResult Index(string sortOrder, string searchString)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            var genre = from g in _db.Genre select g;
+            var genre = _db.Genre.AsQueryable();
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -30,7 +30,7 @@ namespace MaliLb.Areas.Admin.Controllers
                     genre = genre.OrderBy(g => g.Name);
                     break;
             }
-            return View(genre);
+            return View(genre.ToList());
         }
 
         public IActionResult Add()

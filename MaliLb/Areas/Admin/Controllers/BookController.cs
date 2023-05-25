@@ -14,10 +14,18 @@ namespace MaliLb.Areas.Admin.Controllers
         public readonly ApplicationDbContext _db;
         public BookController(ApplicationDbContext db) => _db = db;
 
-        public IActionResult Index()
+        public IActionResult Index(string searchString)
         {
-            List<Book> bookList = _db.Book.Include(u => u.Work).ThenInclude(u => u.Author).Include(u => u.Edition).Include(u => u.Visitor).ToList();
-            return View(bookList);
+            var book = _db.Book.Include(u => u.Work).ThenInclude(u => u.Genre)
+                .Include(u => u.Work).ThenInclude(u => u.Author)
+                .Include(u => u.Edition).Include(u => u.Visitor).AsQueryable();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                book = book.Where(v => v.Work.Name.Contains(searchString) || v.Work.Author.Name.Contains(searchString) || v.Edition.Name.Contains(searchString));
+            }
+
+            return View(book.ToList());
         }
 
         public IActionResult Details(int? id)

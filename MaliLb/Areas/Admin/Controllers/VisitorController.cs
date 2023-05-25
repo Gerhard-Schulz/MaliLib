@@ -15,7 +15,7 @@ namespace MaliLb.Areas.Admin.Controllers
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["NumSortParm"] = sortOrder == "Num" ? "num_desc" : "Num";
-            var visitor = from v in _db.Visitor select v;
+            var visitor = _db.Visitor.AsQueryable();
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -37,7 +37,7 @@ namespace MaliLb.Areas.Admin.Controllers
                     visitor = visitor.OrderBy(v => v.Name);
                     break;
             }
-            return View(visitor);
+            return View(visitor.ToList());
         }
 
         public IActionResult Add()

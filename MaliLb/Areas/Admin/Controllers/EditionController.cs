@@ -14,7 +14,7 @@ namespace MaliLb.Areas.Admin.Controllers
         public IActionResult Index(string sortOrder, string searchString)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            var edition = from e in _db.Edition select e;
+            var edition = _db.Edition.AsQueryable();
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -30,7 +30,7 @@ namespace MaliLb.Areas.Admin.Controllers
                     edition = edition.OrderBy(e => e.Name);
                     break;
             }
-            return View(edition);
+            return View(edition.ToList());
         }
 
         public IActionResult Add()

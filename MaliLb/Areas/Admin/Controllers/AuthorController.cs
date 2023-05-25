@@ -15,7 +15,7 @@ namespace MaliLb.Areas.Admin.Controllers
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
-            var author = from a in _db.Author select a;
+            var author = _db.Author.AsQueryable();
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -31,7 +31,7 @@ namespace MaliLb.Areas.Admin.Controllers
                     author = author.OrderBy(a => a.Name);
                     break;
             }
-            return View(author);
+            return View(author.ToList());
         }
 
         public IActionResult Add()

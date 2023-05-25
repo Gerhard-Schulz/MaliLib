@@ -14,38 +14,49 @@ namespace MaliLb.Areas.Admin.Controllers
         public readonly ApplicationDbContext _db;
         public WorkController(ApplicationDbContext db) => _db = db;
 
-        //public IActionResult Index(string sortOrder, string searchString)
-        //{
-        //    ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-        //    ViewData["NumSortParm"] = sortOrder == "Num" ? "num_desc" : "Num";
-        //    var visitor = from v in _db.Visitor select v;
+        public IActionResult Index(string sortOrder, string searchString)
+        {
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["AuthorSortParm"] = sortOrder == "Author" ? "author_desc" : "Author";
+            ViewData["GenreSortParm"] = sortOrder == "Genre" ? "genre_desc" : "Genre";
 
-        //    if (!String.IsNullOrEmpty(searchString))
-        //    {
-        //        visitor = visitor.Where(v => v.Name.Contains(searchString) || v.СardNumber.ToString().Contains(searchString));
-        //    }
+            var work = _db.Work.Include(u => u.Author).Include(u => u.Genre).AsQueryable();
 
-        //    List<Work> workList = _db.Work.Include(u => u.Author).Include(u => u.Genre).ToList();
-        //    return View(workList);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                work = work.Where(v => v.Name.Contains(searchString) || v.Author.Name.Contains(searchString) || v.Genre.Name.Contains(searchString));
+            }
 
-        //    switch (sortOrder)
-        //    {
-        //        case "name_desc":
-        //            visitor = visitor.OrderByDescending(v => v.Name);
-        //            break;
-        //        case "Num":
-        //            visitor = visitor.OrderBy(s => s.СardNumber);
-        //            break;
-        //        case "num_desc":
-        //            visitor = visitor.OrderByDescending(s => s.СardNumber);
-        //            break;
-        //        default:
-        //            visitor = visitor.OrderBy(v => v.Name);
-        //            break;
-        //    }
-        //    return View(visitor);
-        //}
-        // доделать!!!!!!!
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    work = work.OrderByDescending(v => v.Name);
+                    break;
+                case "Date":
+                    work = work.OrderBy(s => s.DateOfWriting);
+                    break;
+                case "date_desc":
+                    work = work.OrderByDescending(s => s.DateOfWriting);
+                    break;
+                case "Author":
+                    work = work.OrderBy(s => s.Author).ThenBy(s => s.ID);
+                    break;
+                case "author_desc":
+                    work = work.OrderByDescending(s => s.Author).ThenBy(s => s.ID);
+                    break;
+                case "Genre":
+                    work = work.OrderBy(s => s.Genre).ThenBy(s => s.ID);
+                    break;
+                case "genre_desc":
+                    work = work.OrderByDescending(s => s.Genre).ThenBy(s => s.ID);
+                    break;
+                default:
+                    work = work.OrderBy(v => v.Name);
+                    break;
+            }
+            return View(work.ToList());
+        }
 
         public IActionResult Add()
         {

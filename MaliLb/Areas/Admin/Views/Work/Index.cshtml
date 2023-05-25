@@ -1,18 +1,38 @@
-﻿@using MaliLb.Models;
-@model IEnumerable<Work>
+﻿@model IEnumerable<Work>
 
 @{
     ViewData["Title"] = "Произведения";
 }
 
-<h2 class="text-center text-primary mt-4">Произведения <a asp-controller="Work" asp-action="Add" class="btn btn-outline-success"><i class="bi bi-plus-lg"></i></a></h2>
+<div class="row cell-centered w-100">
+    <div class="col mt-5">
+        <a asp-action="Index" class="btn btn-outline-dark">Сбросить фильтр</a>
+    </div>
+    <div class="col-6">
+        <div class="btn-group mt-4 pt-3" role="group">
+            <h2 class="text-center text-primary">Произведения</h2>
+            <a asp-controller="Work" asp-action="Add" class="btn btn-outline-success rounded-2 h-100 m-2"><i class="bi bi-plus-lg"></i></a>
+        </div>
+    </div>
+    <div class="col">
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color">
+                <p class="mt-5">
+                    <strong class="w-100 pb-1" style="font-size: 1.1rem">Поиск:</strong>
+                    <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" class="w-50 border-primary" />
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
 <table class="table table-hover w-100 mt-3 pb-2 cell-centered">
     <thead>
         <tr class="table-light">
-            <th>Название</th>
-            <th>Автор</th>
-            <th>Жанр</th>
-            <th>Год</th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" class="link link-primary page-link">Название</a></th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["AuthorSortParm"]" class="link link-primary page-link">Автор</a></th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["GenreSortParm"]" class="link link-primary page-link">Жанр</a></th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" class="link link-primary page-link">Год</a></th>
             <th>Описание</th>
         </tr>
     </thead>
@@ -21,16 +41,23 @@
         {
             <tr>
                 <td>
-                    @work.Name                     
-                    <div class="btn-group" role="group">
-                        <a asp-controller="Work" asp-action="Edit" asp-route-id="@work.ID" class="btn btn-outline-warning"><i class="bi bi-pen"></i></a>
-                        <a asp-controller="Work" asp-action="Delete" asp-route-id="@work.ID" class="btn btn-outline-danger"><i class="bi bi-trash3"></i></a>
+                    <div class="row justify-content-center">
+                        <div class="col"></div>
+                        <div class="col-6">
+                            @work.Name
+                        </div>
+                        <div class="col">
+                            <div class="btn-group" role="group">
+                                <a asp-controller="Work" asp-action="Edit" asp-route-id="@work.ID" class="btn btn-outline-warning"><i class="bi bi-pen"></i></a>
+                                <a asp-controller="Work" asp-action="Delete" asp-route-id="@work.ID" class="btn btn-outline-danger"><i class="bi bi-trash3"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </td>
                 <td>@work.Author</td>
                 <td>@work.Genre</td>
                 <td>@work.DateOfWriting.ToString("yyyyг.")</td>
-                @if(work.Description!=null)
+                @if (work.Description != null)
                 {
                     <td>@work.Description</td>
                 }
