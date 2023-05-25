@@ -11,10 +11,27 @@ namespace MaliLb.Areas.Admin.Controllers
         public readonly ApplicationDbContext _db;
         public AuthorController(ApplicationDbContext db) => _db = db;
 
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, string searchString)
         {
-            List<Author> authorList = _db.Author.ToList();
-            return View(authorList);
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            var author = from a in _db.Author select a;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                author = author.Where(a => a.Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    author = author.OrderByDescending(a => a.Name);
+                    break;
+                default:
+                    author = author.OrderBy(a => a.Name);
+                    break;
+            }
+            return View(author);
         }
 
         public IActionResult Add()
@@ -84,7 +101,7 @@ namespace MaliLb.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            _db.Author.Remove(authorFromDb  );
+            _db.Author.Remove(authorFromDb);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -5,7 +5,7 @@
     ViewData["Title"] = "Книги";
 }
 
-<h1 class="text-primary text-center">Книги <a asp-controller="Book" asp-action="Add" class="btn btn-outline-success"><i class="bi bi-plus-lg"></i></a></h1>
+<h1 class="text-primary text-center mt-3 pb-2">Книги <a asp-controller="Book" asp-action="Add" class="btn btn-outline-success"><i class="bi bi-plus-lg"></i></a></h1>
 <div class="row pb-3">
     @foreach (var book in Model)
     {
@@ -15,20 +15,25 @@
                     <div class="card border-0 p-3 shadow border-top border-5 rounded">
                         @if (book.VisitorID != null)
                         {
-                            <img src="@book.Img" class="cardcard-img-top rounded" style="filter:grayscale(); object-fit:cover;" />
+                            <img src="@book.Img" class="cardcard-img-top rounded-top" style="filter:grayscale(); object-fit:cover;" height="400" />
                         }
                         else
                         {
-                            <img src="@book.Img" class="cardcard-img-top rounded" />
+                            <img src="@book.Img" class="cardcard-img-top rounded-top" style="object-fit:cover;" height="400" />
                         }
                         <div class="card-body p-0">
                             <div class="pl-1">
-                                <h3 class="text-center text-primary mt-2">@book.Work.Name</h3>
-                                <h5 class="text-center text-dark">Издание: @book.Edition</h5>
-                                @if (book.VisitorID != null)
+                                @if (book.VisitorID == null)
                                 {
-                                    <div class="text-center text-dark">Держатель: @book.Visitor</div>
+                                    <h3 class="text-center text-bg-primary text-light m-0 mt-0 pt-2" style="font-family:Georgia, 'Times New Roman', Times, serif">@book.Work.Name</h3>
+                                    <h5 class="text-center text-bg-primary text-secondary m-0 mt-0 pb-2 rounded-bottom" style="font-family:Georgia, 'Times New Roman', Times, serif">@book.Work.Author</h5>
                                 }
+                                else
+                                {
+                                    <h3 class="text-center text-bg-dark text-light m-0 mt-0 pt-2" style="font-family:Georgia, 'Times New Roman', Times, serif">@book.Work.Name</h3>
+                                    <h5 class="text-center text-bg-dark text-secondary m-0 mt-0 pb-2 rounded-bottom" style="font-family:Georgia, 'Times New Roman', Times, serif">@book.Work.Author</h5>
+                                }
+                                <h5 class="text-center text-dark mt-3">Издание: @book.Edition</h5>
                                 <a class="btn btn-primary w-100 mt-2" asp-area="Admin" asp-controller="Book" asp-action="Details" asp-route-id="@book.ID">Подробнее</a>
                             </div>
                         </div>

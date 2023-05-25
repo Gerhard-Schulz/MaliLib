@@ -11,10 +11,26 @@ namespace MaliLb.Areas.Admin.Controllers
         public readonly ApplicationDbContext _db;
         public EditionController(ApplicationDbContext db) => _db = db;
 
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, string searchString)
         {
-            List<Edition> editionList = _db.Edition.ToList();
-            return View(editionList);
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            var edition = from e in _db.Edition select e;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                edition = edition.Where(e => e.Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    edition = edition.OrderByDescending(e => e.Name);
+                    break;
+                default:
+                    edition = edition.OrderBy(e => e.Name);
+                    break;
+            }
+            return View(edition);
         }
 
         public IActionResult Add()

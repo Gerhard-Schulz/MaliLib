@@ -11,10 +11,26 @@ namespace MaliLb.Areas.Admin.Controllers
         public readonly ApplicationDbContext _db;
         public GenreController(ApplicationDbContext db) => _db = db;
 
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, string searchString)
         {
-            List<Genre> genreList = _db.Genre.ToList();
-            return View(genreList);
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            var genre = from g in _db.Genre select g;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                genre = genre.Where(g => g.Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    genre = genre.OrderByDescending(g => g.Name);
+                    break;
+                default:
+                    genre = genre.OrderBy(g => g.Name);
+                    break;
+            }
+            return View(genre);
         }
 
         public IActionResult Add()

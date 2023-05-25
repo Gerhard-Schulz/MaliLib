@@ -16,7 +16,7 @@ namespace MaliLb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Book> bookList = _db.Book.Include(u => u.Work).Include(u => u.Edition).Include(u => u.Visitor).ToList();
+            List<Book> bookList = _db.Book.Include(u => u.Work).ThenInclude(u => u.Author).Include(u => u.Edition).Include(u => u.Visitor).ToList();
             return View(bookList);
         }
 

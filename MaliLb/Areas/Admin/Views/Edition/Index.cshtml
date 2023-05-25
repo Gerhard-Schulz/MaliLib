@@ -5,17 +5,48 @@
     ViewData["Title"] = "Издатели";
 }
 
-<h2 class="text-center text-primary mt-4">Издатели <a asp-controller="Edition" asp-action="Add" class="btn btn-outline-success"><i class="bi bi-plus-lg"></i></a></h2>
+
+<div class="row cell-centered w-100">
+    <div class="col mt-5">
+        <a asp-action="Index" class="btn btn-outline-dark">Сбросить фильтр</a>
+    </div>
+    <div class="col-6">
+        <div class="btn-group mt-4 pt-3" role="group">
+            <h2 class="text-center text-primary">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" class="link link-primary page-link">Издатели</a>
+            </h2>
+            <a asp-controller="Edition" asp-action="Add" class="btn btn-outline-success rounded-2 h-100 m-2"><i class="bi bi-plus-lg"></i></a>
+        </div>
+    </div>
+    <div class="col">
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color">
+                <p class="mt-5">
+                    <strong class="w-100 pb-1" style="font-size: 1.1rem">Поиск:</strong>
+                    <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" class="w-50 border-primary" />
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
 <table class="table table-hover w-100 mt-3 pb-2 cell-centered">
     <tbody>
         @foreach (var edition in Model)
         {
             <tr>
                 <td>
-                    @edition.Name
-                    <div class="btn-group" role="group">
-                        <a asp-controller="Edition" asp-action="Edit" asp-route-id="@edition.ID" class="btn btn-outline-warning"><i class="bi bi-pen"></i></a>
-                        <a asp-controller="Edition" asp-action="Delete" asp-route-id="@edition.ID" class="btn btn-outline-danger"><i class="bi bi-trash3"></i></a>
+                    <div class="row justify-content-center">
+                        <div class="col"></div>
+                        <div class="col-6">
+                            @edition.Name
+                        </div>
+                        <div class="col">
+                            <div class="btn-group" role="group">
+                                <a asp-controller="Edition" asp-action="Edit" asp-route-id="@edition.ID" class="btn btn-outline-warning"><i class="bi bi-pen"></i></a>
+                                <a asp-controller="Edition" asp-action="Delete" asp-route-id="@edition.ID" class="btn btn-outline-danger"><i class="bi bi-trash3"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </td>
             </tr>

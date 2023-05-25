@@ -14,11 +14,38 @@ namespace MaliLb.Areas.Admin.Controllers
         public readonly ApplicationDbContext _db;
         public WorkController(ApplicationDbContext db) => _db = db;
 
-        public IActionResult Index()
-        {
-            List<Work> workList = _db.Work.Include(u => u.Author).Include(u => u.Genre).ToList();
-            return View(workList);
-        }
+        //public IActionResult Index(string sortOrder, string searchString)
+        //{
+        //    ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+        //    ViewData["NumSortParm"] = sortOrder == "Num" ? "num_desc" : "Num";
+        //    var visitor = from v in _db.Visitor select v;
+
+        //    if (!String.IsNullOrEmpty(searchString))
+        //    {
+        //        visitor = visitor.Where(v => v.Name.Contains(searchString) || v.СardNumber.ToString().Contains(searchString));
+        //    }
+
+        //    List<Work> workList = _db.Work.Include(u => u.Author).Include(u => u.Genre).ToList();
+        //    return View(workList);
+
+        //    switch (sortOrder)
+        //    {
+        //        case "name_desc":
+        //            visitor = visitor.OrderByDescending(v => v.Name);
+        //            break;
+        //        case "Num":
+        //            visitor = visitor.OrderBy(s => s.СardNumber);
+        //            break;
+        //        case "num_desc":
+        //            visitor = visitor.OrderByDescending(s => s.СardNumber);
+        //            break;
+        //        default:
+        //            visitor = visitor.OrderBy(v => v.Name);
+        //            break;
+        //    }
+        //    return View(visitor);
+        //}
+        // доделать!!!!!!!
 
         public IActionResult Add()
         {
